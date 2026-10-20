@@ -1,0 +1,5 @@
+app_identifier("tech.clipz.app")
+apple_id(ENV["FASTLANE_APPLE_ID"])  # set in fastlane/.env (see .env.example)
+
+team_id(ENV["FASTLANE_TEAM_ID"])    # Developer Portal team (signing)
+itc_team_id(ENV["ITC_TEAM_ID"])     # App Store Connect team; optional if your account has one team

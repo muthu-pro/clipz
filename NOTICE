@@ -1,0 +1,19 @@
+Clipz
+Copyright (C) 2026 Muthukumar Thamilmani
+
+This product is licensed under the GNU General Public License v3.0 only
+(GPL-3.0-only). See the LICENSE file for the full text.
+
+This product bundles the following third-party open-source software.
+Their licenses are reproduced in THIRD_PARTY_LICENSES.md.
+
+- GRDB.swift — SQLite toolkit — MIT License
+  Copyright (c) 2015-2024 Gwendal Roué
+  https://github.com/groue/GRDB.swift
+
+- ZIPFoundation — ZIP archiving — MIT License
+  Copyright (c) 2017-2025 Thomas Zoechling
+  https://github.com/weichsel/ZIPFoundation
+
+- SQLite — embedded database engine — Public Domain
+  https://www.sqlite.org

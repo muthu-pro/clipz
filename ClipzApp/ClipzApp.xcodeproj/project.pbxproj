@@ -1,0 +1,692 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA7700012F98B5FE00E00F35 /* ClipzUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA5500012F98B5FE00E00F35 /* ClipzUI */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		000E9E5C2F98B5FE00E00F35 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 000E9E442F98B5FD00E00F35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 000E9E4B2F98B5FD00E00F35;
+			remoteInfo = ClipzApp;
+		};
+		000E9E662F98B5FE00E00F35 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 000E9E442F98B5FD00E00F35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 000E9E4B2F98B5FD00E00F35;
+			remoteInfo = ClipzApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		000E9E4C2F98B5FD00E00F35 /* ClipzApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClipzApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000E9E5B2F98B5FE00E00F35 /* ClipzAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClipzAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		000E9E652F98B5FE00E00F35 /* ClipzAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClipzAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		000E9E4E2F98B5FD00E00F35 /* ClipzApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ClipzApp;
+			sourceTree = "<group>";
+		};
+		000E9E5E2F98B5FE00E00F35 /* ClipzAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ClipzAppTests;
+			sourceTree = "<group>";
+		};
+		000E9E682F98B5FE00E00F35 /* ClipzAppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ClipzAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		000E9E492F98B5FD00E00F35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA7700012F98B5FE00E00F35 /* ClipzUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000E9E582F98B5FE00E00F35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000E9E622F98B5FE00E00F35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000E9E432F98B5FD00E00F35 = {
+			isa = PBXGroup;
+			children = (
+				000E9E4E2F98B5FD00E00F35 /* ClipzApp */,
+				000E9E5E2F98B5FE00E00F35 /* ClipzAppTests */,
+				000E9E682F98B5FE00E00F35 /* ClipzAppUITests */,
+				000E9E4D2F98B5FD00E00F35 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		000E9E4D2F98B5FD00E00F35 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				000E9E4C2F98B5FD00E00F35 /* ClipzApp.app */,
+				000E9E5B2F98B5FE00E00F35 /* ClipzAppTests.xctest */,
+				000E9E652F98B5FE00E00F35 /* ClipzAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		000E9E4B2F98B5FD00E00F35 /* ClipzApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000E9E6F2F98B5FE00E00F35 /* Build configuration list for PBXNativeTarget "ClipzApp" */;
+			buildPhases = (
+				000E9E482F98B5FD00E00F35 /* Sources */,
+				000E9E492F98B5FD00E00F35 /* Frameworks */,
+				000E9E4A2F98B5FD00E00F35 /* Resources */,
+				00CAFE000000000000000A01 /* Check private API symbols */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				000E9E4E2F98B5FD00E00F35 /* ClipzApp */,
+			);
+			name = ClipzApp;
+			packageProductDependencies = (
+				AA5500012F98B5FE00E00F35 /* ClipzUI */,
+			);
+			productName = ClipzApp;
+			productReference = 000E9E4C2F98B5FD00E00F35 /* ClipzApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		000E9E5A2F98B5FE00E00F35 /* ClipzAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000E9E722F98B5FE00E00F35 /* Build configuration list for PBXNativeTarget "ClipzAppTests" */;
+			buildPhases = (
+				000E9E572F98B5FE00E00F35 /* Sources */,
+				000E9E582F98B5FE00E00F35 /* Frameworks */,
+				000E9E592F98B5FE00E00F35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				000E9E5D2F98B5FE00E00F35 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				000E9E5E2F98B5FE00E00F35 /* ClipzAppTests */,
+			);
+			name = ClipzAppTests;
+			packageProductDependencies = (
+			);
+			productName = ClipzAppTests;
+			productReference = 000E9E5B2F98B5FE00E00F35 /* ClipzAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		000E9E642F98B5FE00E00F35 /* ClipzAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000E9E752F98B5FE00E00F35 /* Build configuration list for PBXNativeTarget "ClipzAppUITests" */;
+			buildPhases = (
+				000E9E612F98B5FE00E00F35 /* Sources */,
+				000E9E622F98B5FE00E00F35 /* Frameworks */,
+				000E9E632F98B5FE00E00F35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				000E9E672F98B5FE00E00F35 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				000E9E682F98B5FE00E00F35 /* ClipzAppUITests */,
+			);
+			name = ClipzAppUITests;
+			packageProductDependencies = (
+			);
+			productName = ClipzAppUITests;
+			productReference = 000E9E652F98B5FE00E00F35 /* ClipzAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		000E9E442F98B5FD00E00F35 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					000E9E4B2F98B5FD00E00F35 = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					000E9E5A2F98B5FE00E00F35 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 000E9E4B2F98B5FD00E00F35;
+					};
+					000E9E642F98B5FE00E00F35 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 000E9E4B2F98B5FD00E00F35;
+					};
+				};
+			};
+			buildConfigurationList = 000E9E472F98B5FD00E00F35 /* Build configuration list for PBXProject "ClipzApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 000E9E432F98B5FD00E00F35;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AA3300012F98B5FE00E00F35 /* XCLocalSwiftPackageReference "../Packages/ClipzCore" */,
+				AA3300022F98B5FE00E00F35 /* XCLocalSwiftPackageReference "../Packages/ClipzML" */,
+				AA3300032F98B5FE00E00F35 /* XCLocalSwiftPackageReference "../Packages/ClipzUI" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 000E9E4D2F98B5FD00E00F35 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000E9E4B2F98B5FD00E00F35 /* ClipzApp */,
+				000E9E5A2F98B5FE00E00F35 /* ClipzAppTests */,
+				000E9E642F98B5FE00E00F35 /* ClipzAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		000E9E4A2F98B5FD00E00F35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000E9E592F98B5FE00E00F35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000E9E632F98B5FE00E00F35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00CAFE000000000000000A01 /* Check private API symbols */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Check private API symbols";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# swift_20 HR-7: flag possible private symbols for human review.\nBIN=\"$BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\"\nif [ -f \"$BIN\" ]; then\n  SUSPECT=$(nm -gU \"$BIN\" 2>/dev/null | grep -E ' _[A-Z]{2,}_' | sort -u || true)\n  if [ -n \"$SUSPECT\" ]; then\n    echo \"warning: possible private API symbols detected (HR-7) - review before archiving:\"\n    echo \"$SUSPECT\" | sed 's/^/warning: /'\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		000E9E482F98B5FD00E00F35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000E9E572F98B5FE00E00F35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000E9E612F98B5FE00E00F35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		000E9E5D2F98B5FE00E00F35 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 000E9E4B2F98B5FD00E00F35 /* ClipzApp */;
+			targetProxy = 000E9E5C2F98B5FE00E00F35 /* PBXContainerItemProxy */;
+		};
+		000E9E672F98B5FE00E00F35 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 000E9E4B2F98B5FD00E00F35 /* ClipzApp */;
+			targetProxy = 000E9E662F98B5FE00E00F35 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		000E9E6D2F98B5FE00E00F35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		000E9E6E2F98B5FE00E00F35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		000E9E702F98B5FE00E00F35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_ENTITLEMENTS = ClipzApp/ClipzApp.entitlements;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.clipz.app;
+				PRODUCT_NAME = Clipz;
+				INFOPLIST_KEY_CFBundleDisplayName = Clipz;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSMinimumSystemVersion = "14.0";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSDesktopFolderUsageDescription = "Clipz watches the Desktop folder you choose for new screenshots so they're added to your clipboard history.";
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "Clipz reads documents you drop into the app to add them to your clipboard history.";
+				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "Clipz reads downloads you drop into the app to add them to your clipboard history.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Clipz uses Touch ID to unlock and protect your clipboard history.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Muthukumar Thamilmani. Licensed under GPL-3.0.";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		000E9E712F98B5FE00E00F35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_ENTITLEMENTS = ClipzApp/ClipzApp.entitlements;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.clipz.app;
+				PRODUCT_NAME = Clipz;
+				INFOPLIST_KEY_CFBundleDisplayName = Clipz;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSMinimumSystemVersion = "14.0";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSDesktopFolderUsageDescription = "Clipz watches the Desktop folder you choose for new screenshots so they're added to your clipboard history.";
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "Clipz reads documents you drop into the app to add them to your clipboard history.";
+				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "Clipz reads downloads you drop into the app to add them to your clipboard history.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Clipz uses Touch ID to unlock and protect your clipboard history.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Muthukumar Thamilmani. Licensed under GPL-3.0.";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+		000E9E732F98B5FE00E00F35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.clipz.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clipz.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Clipz";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		000E9E742F98B5FE00E00F35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.clipz.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clipz.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Clipz";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+		000E9E762F98B5FE00E00F35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.clipz.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = ClipzApp;
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		000E9E772F98B5FE00E00F35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.clipz.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = ClipzApp;
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		000E9E472F98B5FD00E00F35 /* Build configuration list for PBXProject "ClipzApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000E9E6D2F98B5FE00E00F35 /* Debug */,
+				000E9E6E2F98B5FE00E00F35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000E9E6F2F98B5FE00E00F35 /* Build configuration list for PBXNativeTarget "ClipzApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000E9E702F98B5FE00E00F35 /* Debug */,
+				000E9E712F98B5FE00E00F35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000E9E722F98B5FE00E00F35 /* Build configuration list for PBXNativeTarget "ClipzAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000E9E732F98B5FE00E00F35 /* Debug */,
+				000E9E742F98B5FE00E00F35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000E9E752F98B5FE00E00F35 /* Build configuration list for PBXNativeTarget "ClipzAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000E9E762F98B5FE00E00F35 /* Debug */,
+				000E9E772F98B5FE00E00F35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AA3300012F98B5FE00E00F35 /* XCLocalSwiftPackageReference "../Packages/ClipzCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/ClipzCore;
+		};
+		AA3300022F98B5FE00E00F35 /* XCLocalSwiftPackageReference "../Packages/ClipzML" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/ClipzML;
+		};
+		AA3300032F98B5FE00E00F35 /* XCLocalSwiftPackageReference "../Packages/ClipzUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/ClipzUI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA5500012F98B5FE00E00F35 /* ClipzUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ClipzUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 000E9E442F98B5FD00E00F35 /* Project object */;
+}

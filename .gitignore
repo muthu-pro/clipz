@@ -1,0 +1,71 @@
+## macOS / Finder
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+## Xcode
+build/
+DerivedData/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+*.xccheckout
+*.xcscmblueprint
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+*.xcodeproj/xcuserdata
+*.xcworkspace/xcuserdata
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+## CocoaPods / Carthage — not used, keep as safety net
+Pods/
+Carthage/Build/
+
+## Fastlane (depth-independent — config lives in ClipzApp/fastlane/)
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots/**/*.png
+**/fastlane/test_output
+
+## Secrets
+*.p8
+*.p12
+*.cer
+*.certSigningRequest
+AuthKey_*.p8
+.env
+.env.*
+!.env.example
+secrets.json
+
+## Logs / tmp
+*.log
+*.tmp
+/tmp/
+
+## Editor / tooling
+.vscode/
+.idea/
+.cursor/
+
+## User-specific Pencil state (keep committed .pen files; ignore backups)
+*.pen.bak

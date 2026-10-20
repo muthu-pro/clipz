@@ -1,0 +1,89 @@
+# Clipz — direct (notarized) distribution
+#
+# Clipz ships outside the Mac App Store: a Developer ID-signed, notarized,
+# stapled .app wrapped in a .dmg, published on GitHub Releases (and Homebrew).
+#
+# Run from the ClipzApp/ directory:
+#   fastlane build       # clean Release build → Developer ID-signed .app
+#   fastlane notarize    # notarize + staple the built .app
+#   fastlane dmg         # package the .app into ../build/fastlane/Clipz.dmg
+#   fastlane release     # build → notarize → dmg
+#
+# Notarization auth: an App Store Connect API key (ASC_KEY_ID / ASC_ISSUER_ID
+# / ASC_KEY_PATH) — see fastlane/.env.example. See RELEASING.md for the full
+# process, including signing identity setup.
+
+default_platform(:mac)
+
+SCHEME     = "ClipzApp"
+PROJECT    = "ClipzApp.xcodeproj"
+OUTPUT_DIR = "../build/fastlane"
+APP_NAME   = "Clipz"
+TEAM_ID    = ENV["FASTLANE_TEAM_ID"]   # your Apple Developer team id (see .env.example)
+
+platform :mac do
+  def asc_api_key
+    return nil unless ENV["ASC_KEY_ID"] && ENV["ASC_ISSUER_ID"] &&
+                      (ENV["ASC_KEY_PATH"] || ENV["ASC_KEY_CONTENT"])
+    app_store_connect_api_key(
+      key_id: ENV["ASC_KEY_ID"],
+      issuer_id: ENV["ASC_ISSUER_ID"],
+      key_filepath: ENV["ASC_KEY_PATH"],
+      key_content: ENV["ASC_KEY_CONTENT"],
+      is_key_content_base64: ENV["ASC_KEY_BASE64"] == "true"
+    )
+  end
+
+  desc "Clean Release build → Developer ID-signed .app in #{OUTPUT_DIR}"
+  lane :build do
+    build_mac_app(
+      project: PROJECT,
+      scheme: SCHEME,
+      configuration: "Release",
+      clean: true,
+      output_directory: OUTPUT_DIR,
+      output_name: APP_NAME,
+      export_method: "developer-id",
+      xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        method: "developer-id",
+        teamID: TEAM_ID,
+        signingStyle: "automatic"
+      }
+    )
+  end
+
+  desc "Notarize + staple the built .app"
+  lane :notarize do
+    notarize(
+      package: "#{OUTPUT_DIR}/#{APP_NAME}.app",
+      api_key: asc_api_key,
+      print_log: true
+    )
+  end
+
+  desc "Package the notarized .app into a .dmg"
+  lane :dmg do
+    app = "#{OUTPUT_DIR}/#{APP_NAME}.app"
+    dmg = "#{OUTPUT_DIR}/#{APP_NAME}.dmg"
+    UI.user_error!("No .app at #{app} — run `fastlane build` first.") unless File.exist?(app)
+    sh("rm -f '#{dmg}'")
+    sh("hdiutil create -volname '#{APP_NAME}' -srcfolder '#{app}' -ov -format UDZO '#{dmg}'")
+    UI.success("📦 #{dmg}")
+  end
+
+  desc "Clean build → notarize → dmg (ready to upload to GitHub Releases)"
+  lane :release do
+    build
+    notarize
+    dmg
+  end
+
+  after_all do |lane|
+    UI.success("✅ Lane '#{lane}' finished. Artifacts in #{OUTPUT_DIR}")
+  end
+
+  error do |lane, exception|
+    UI.error("❌ Lane '#{lane}' failed: #{exception.message}")
+  end
+end
