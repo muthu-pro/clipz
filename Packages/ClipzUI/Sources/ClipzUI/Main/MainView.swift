@@ -139,12 +139,28 @@ private struct WindowChromeConfigurator: NSViewRepresentable {
 
     func makeNSView(context: Context) -> NSView {
         let view = NSView()
-        DispatchQueue.main.async { configure(view.window) }
+        // The view isn't in a window yet when makeNSView runs, so
+        // `view.window` is nil on the first tick and the accessory would
+        // never install. Poll briefly until the window is attached.
+        scheduleConfigure(for: view, attempt: 0)
         return view
     }
 
     func updateNSView(_ nsView: NSView, context: Context) {
-        DispatchQueue.main.async { configure(nsView.window) }
+        configure(nsView.window)
+    }
+
+    private func scheduleConfigure(for view: NSView, attempt: Int) {
+        DispatchQueue.main.async { [weak view] in
+            guard let view else { return }
+            if let window = view.window {
+                configure(window)
+            } else if attempt < 40 {   // ~2 s of 50 ms retries
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    scheduleConfigure(for: view, attempt: attempt + 1)
+                }
+            }
+        }
     }
 
     private func configure(_ window: NSWindow?) {

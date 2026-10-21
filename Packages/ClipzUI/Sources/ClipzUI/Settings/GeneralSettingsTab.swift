@@ -88,33 +88,42 @@ struct GeneralSettingsTab: View {
                     .onChange(of: autoPaste) { _, new in
                         Task { await container.settings.set(SettingsKeys.autoPaste, new) }
                     }
-                Text("Clicking an item in the menu-bar popover re-focuses the previous app and presses ⌘V for you.")
+                Text("Clicking an item in the menu-bar popover — or choosing one in the ⌘⇧V quick-paste panel — re-focuses the previous app and presses ⌘V for you. Requires Accessibility access (see Permissions below).")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-
-                if autoPaste {
-                    HStack(spacing: 8) {
-                        Image(systemName: accessibilityGranted
-                            ? "checkmark.circle.fill"
-                            : "exclamationmark.triangle.fill")
-                            .foregroundStyle(accessibilityGranted ? Color.green : Color.orange)
-                        if accessibilityGranted {
-                            Text("Accessibility access is granted.")
-                                .font(.caption)
-                        } else {
-                            Text("Clipz needs Accessibility access to synthesize ⌘V.")
-                                .font(.caption)
-                            Spacer()
-                            Button("Open Settings…") {
-                                AccessibilityPermission.openSettings()
-                            }
-                            .controlSize(.small)
-                        }
-                    }
-                    .padding(.top, 4)
-                }
             } header: {
                 Text("Paste")
+            }
+
+            Section {
+                HStack(alignment: .top, spacing: 10) {
+                    Image(systemName: accessibilityGranted
+                        ? "checkmark.circle.fill"
+                        : "exclamationmark.triangle.fill")
+                        .foregroundStyle(accessibilityGranted ? Color.green : Color.orange)
+                        .font(.title3)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(accessibilityGranted
+                            ? "Accessibility access is enabled"
+                            : "Accessibility access is required")
+                            .font(.callout)
+                            .fontWeight(.medium)
+                        Text(accessibilityGranted
+                            ? "Clipz can paste a selected clip straight into the app you were using."
+                            : "macOS blocks Clipz from pressing ⌘V without it — clips are copied but won't auto-paste. Clipz may not appear in the list until you enable it here.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    Spacer(minLength: 8)
+                    if !accessibilityGranted {
+                        Button("Enable…") { enableAccessibility() }
+                            .controlSize(.small)
+                    }
+                }
+                .padding(.vertical, 2)
+            } header: {
+                Text("Permissions")
             }
 
             Section {
@@ -190,6 +199,15 @@ struct GeneralSettingsTab: View {
 
     private func applyDockIcon(_ visible: Bool) {
         NSApp.setActivationPolicy(visible ? .regular : .accessory)
+    }
+
+    /// Fire the one-shot system prompt (which registers Clipz in the
+    /// Accessibility list the first time) and then deep-link straight to
+    /// the Accessibility pane so the user can flip the switch. Status
+    /// refreshes automatically via didBecomeActiveNotification on return.
+    private func enableAccessibility() {
+        AccessibilityPermission.requestWithPrompt()
+        AccessibilityPermission.openSettings()
     }
 
     /// Read the SMAppService status into the local view state. SMAppService
