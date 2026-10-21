@@ -59,6 +59,13 @@ public final class AppContainer {
     /// sync by the Settings picker.
     public var sensitiveContentPolicy: SensitiveContentPolicy = .protect
 
+    /// Latest result of the GitHub-Releases update check. Observed by the
+    /// About screen and the title-bar update badge.
+    public var updateState: UpdateState = .unknown
+
+    @ObservationIgnored
+    private let updateChecker = UpdateChecker()
+
     // MARK: - Menu bar
 
     /// Installed on `start()`. Kept as a strong reference so the status
@@ -176,6 +183,38 @@ public final class AppContainer {
         await startBiometricLock()
 
         sensitiveContentPolicy = await settings.get(SettingsKeys.sensitiveContentPolicy)
+
+        // Fire a throttled, opt-out update check in the background — never
+        // blocks startup.
+        Task { [weak self] in await self?.checkForUpdates(force: false) }
+    }
+
+    /// Check GitHub Releases for a newer version. When `force` is false the
+    /// check is skipped if auto-check is disabled or we checked within the
+    /// last 24h; `force` (the About "Check for Updates" button) always runs.
+    /// Updates `updateState` for observers.
+    public func checkForUpdates(force: Bool) async {
+        if !force {
+            guard await settings.get(SettingsKeys.autoCheckForUpdates) else { return }
+            let last = await settings.get(SettingsKeys.lastUpdateCheckAt)
+            let dayAgo = Date().timeIntervalSince1970 - 24 * 60 * 60
+            guard last < dayAgo else { return }
+        }
+
+        updateState = .checking
+        do {
+            let latest = try await updateChecker.fetchLatest()
+            let current = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
+            await settings.set(SettingsKeys.lastUpdateCheckAt, Date().timeIntervalSince1970)
+            await settings.set(SettingsKeys.lastKnownLatestVersion, latest.version)
+            if UpdateChecker.isNewer(latest.version, than: current) {
+                updateState = .available(latest)
+            } else {
+                updateState = .upToDate
+            }
+        } catch {
+            updateState = .failed(error.localizedDescription)
+        }
     }
 
     /// (Re)register the global hotkey from the persisted settings. Called on

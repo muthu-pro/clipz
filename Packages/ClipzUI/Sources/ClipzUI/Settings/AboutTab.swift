@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import SwiftUI
 import AppKit
+import ClipzCore
 
-/// About screen. App icon, version, support links, privacy statement.
+/// About screen. App icon, version, update status, support links, privacy.
 struct AboutTab: View {
+    @Environment(AppContainer.self) private var container
+
     var body: some View {
         VStack(spacing: 14) {
             appIcon
@@ -14,11 +17,13 @@ struct AboutTab: View {
                 .foregroundStyle(.secondary)
                 .font(.callout)
 
+            updateRow
+
             HStack(spacing: 16) {
                 Link("clipz.tech",
                      destination: URL(string: "https://clipz.tech")!)
                 Link("Source (GitHub)",
-                     destination: URL(string: "https://github.com/muthu-pro/clipz-native")!)
+                     destination: URL(string: "https://github.com/muthu-pro/clipz")!)
                 Link("Support",
                      destination: URL(string: "mailto:support@clipz.tech")!)
             }
@@ -57,6 +62,50 @@ struct AboutTab: View {
         }
         .padding(28)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    /// Update status + actions, driven by the shared `container.updateState`.
+    @ViewBuilder
+    private var updateRow: some View {
+        HStack(spacing: 8) {
+            switch container.updateState {
+            case .checking:
+                ProgressView().controlSize(.small).scaleEffect(0.7)
+                Text("Checking for updates…")
+                    .font(.caption).foregroundStyle(.secondary)
+            case .upToDate:
+                Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
+                Text("You're on the latest version.")
+                    .font(.caption).foregroundStyle(.secondary)
+            case .available(let info):
+                Image(systemName: "arrow.down.circle.fill").foregroundStyle(.tint)
+                Text("Update available: \(info.version)")
+                    .font(.caption.weight(.medium))
+                Button("Download…") {
+                    NSWorkspace.shared.open(info.downloadURL ?? info.releaseURL)
+                }
+                .controlSize(.small)
+            case .failed:
+                Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.orange)
+                Text("Couldn't check for updates.")
+                    .font(.caption).foregroundStyle(.secondary)
+            case .unknown:
+                EmptyView()
+            }
+
+            if !isChecking {
+                Button("Check for Updates") {
+                    Task { await container.checkForUpdates(force: true) }
+                }
+                .controlSize(.small)
+            }
+        }
+        .frame(minHeight: 20)
+    }
+
+    private var isChecking: Bool {
+        if case .checking = container.updateState { return true }
+        return false
     }
 
     private var appIcon: some View {

@@ -16,6 +16,7 @@ struct GeneralSettingsTab: View {
     @State private var startAtLogin = false
     @State private var loginItemNeedsApproval = false
     @State private var loginItemError: String? = nil
+    @State private var autoCheckUpdates = true
     @State private var hotkeyEnabled = true
     @State private var hotkeyKeyCode = 9
     @State private var hotkeyModifiers: NSEvent.ModifierFlags = [.command, .shift]
@@ -127,6 +128,18 @@ struct GeneralSettingsTab: View {
             }
 
             Section {
+                Toggle("Automatically check for updates", isOn: $autoCheckUpdates)
+                    .onChange(of: autoCheckUpdates) { _, new in
+                        Task { await container.settings.set(SettingsKeys.autoCheckForUpdates, new) }
+                    }
+                Text("Clipz checks GitHub for a newer version (about once a day). Only a version number is requested — no account, no personal data. See the current version under About.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            } header: {
+                Text("Updates")
+            }
+
+            Section {
                 Toggle("Open quick-paste with a global shortcut", isOn: $hotkeyEnabled)
                     .onChange(of: hotkeyEnabled) { _, new in
                         Task {
@@ -178,6 +191,7 @@ struct GeneralSettingsTab: View {
             showDockIcon = await container.settings.get(SettingsKeys.showDockIcon)
             muteCopySound = await container.settings.get(SettingsKeys.muteCopySound)
             autoPaste = await container.settings.get(SettingsKeys.autoPaste)
+            autoCheckUpdates = await container.settings.get(SettingsKeys.autoCheckForUpdates)
             hotkeyEnabled = await container.settings.get(SettingsKeys.globalHotkeyEnabled)
             hotkeyKeyCode = await container.settings.get(SettingsKeys.globalHotkeyKeyCode)
             hotkeyModifiers = NSEvent.ModifierFlags(

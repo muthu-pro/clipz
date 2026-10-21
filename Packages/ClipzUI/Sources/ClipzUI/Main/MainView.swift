@@ -23,7 +23,7 @@ public struct MainView: View {
                 .background(Color(nsColor: .windowBackgroundColor))
         }
         .frame(minWidth: 760, minHeight: 520)
-        .background(WindowChromeConfigurator(openSettings: openSettings))
+        .background(WindowChromeConfigurator(openSettings: openSettings, container: container))
         .sheet(isPresented: $showOnboarding) {
             OnboardingView { showOnboarding = false }
                 .environment(container)
@@ -43,7 +43,13 @@ public struct MainView: View {
 /// loading state so the click has visible feedback.
 private struct TitlebarSettingsButton: View {
     let openSettings: () -> Void
+    @Environment(AppContainer.self) private var container
     @State private var isOpening = false
+
+    private var updateAvailable: Bool {
+        if case .available = container.updateState { return true }
+        return false
+    }
 
     var body: some View {
         Button {
@@ -66,6 +72,20 @@ private struct TitlebarSettingsButton: View {
                     ClipzWordmark(size: 13)
                         .fixedSize()
                     logo
+                        .overlay(alignment: .topTrailing) {
+                            if updateAvailable {
+                                Circle()
+                                    .fill(Color.accentColor)
+                                    .frame(width: 6, height: 6)
+                                    .overlay(
+                                        Circle().stroke(
+                                            Color(nsColor: .windowBackgroundColor),
+                                            lineWidth: 1
+                                        )
+                                    )
+                                    .offset(x: 2, y: -2)
+                            }
+                        }
                 }
             }
             .padding(.horizontal, 8)
@@ -74,7 +94,7 @@ private struct TitlebarSettingsButton: View {
         }
         .buttonStyle(.plain)
         .disabled(isOpening)
-        .help("Settings (⌘,)")
+        .help(updateAvailable ? "Update available — open Settings › About" : "Settings (⌘,)")
         .padding(.trailing, 8)
     }
 
@@ -132,6 +152,7 @@ private struct TitlebarSettingsButton: View {
 /// title-bar accessory hosting our "Clipz" button.
 private struct WindowChromeConfigurator: NSViewRepresentable {
     let openSettings: OpenSettingsAction
+    let container: AppContainer
 
     private static let accessoryIdentifier = NSUserInterfaceItemIdentifier(
         "tech.clipz.app.titlebarAccessory"
@@ -178,6 +199,7 @@ private struct WindowChromeConfigurator: NSViewRepresentable {
         let action = openSettings
         let hosting = NSHostingView(
             rootView: TitlebarSettingsButton(openSettings: { action() })
+                .environment(container)
         )
         hosting.translatesAutoresizingMaskIntoConstraints = false
 

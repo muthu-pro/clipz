@@ -78,6 +78,11 @@ public enum SettingsKeys {
     /// Set once the first-run welcome flow has been completed/dismissed.
     public static let hasSeenOnboarding = boolKey("hasSeenOnboarding", default: false)
 
+    // Updates — check GitHub Releases for a newer version.
+    public static let autoCheckForUpdates = boolKey("autoCheckForUpdates", default: true)
+    public static let lastUpdateCheckAt = doubleKey("lastUpdateCheckAt", default: 0)
+    public static let lastKnownLatestVersion = stringKey("lastKnownLatestVersion", default: "")
+
     // MARK: - Privacy
     /// Bundle identifiers of apps Clipz must never capture clipboard
     /// content from (in addition to the always-on concealed-type rule).
@@ -123,8 +128,15 @@ public enum SettingsKeys {
         )
     }
 
-    // Kept for future keys that store a single string (none right now).
-    @available(*, unavailable, message: "no string keys are declared at the moment — add here when one appears")
+    private static func doubleKey(_ key: String, default value: Double) -> SettingsKey<Double> {
+        SettingsKey(
+            rawKey: key,
+            defaultValue: value,
+            encode: { String($0) },
+            decode: { Double($0) }
+        )
+    }
+
     private static func stringKey(_ key: String, default value: String) -> SettingsKey<String> {
         SettingsKey(rawKey: key, defaultValue: value, encode: { $0 }, decode: { $0 })
     }
