@@ -4,6 +4,26 @@ All notable changes to Clipz are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/); versions track the app's
 `MARKETING_VERSION`.
 
+## [1.0.2] - 2026-10-21
+
+### Paste
+- **Quick-paste now reliably pastes into the target app.** The ⌘⇧V panel is
+  non-activating, so Clipz never holds focus; the paste engine was still
+  hiding the (inactive) app before synthesizing ⌘V, which disrupted focus
+  and the keystroke landed nowhere. It now only yields focus when it
+  actually holds it.
+- When auto-paste is on but Accessibility access is missing, quick-paste now
+  surfaces the system permission prompt instead of silently doing nothing
+  (the clip is still copied, so manual ⌘V works meanwhile).
+
+### Settings & window
+- **Fixed the Clipz logo + Settings button occasionally missing** from the
+  main window's title bar — a timing race meant the title-bar accessory
+  sometimes never installed. It now waits for the window to attach.
+- Added a dedicated **Permissions** section in General settings showing
+  Accessibility status, with an **Enable…** button that registers Clipz and
+  opens the macOS Accessibility pane directly.
+
 ## [Unreleased]
 
 ### Open source
