@@ -74,6 +74,8 @@ final class QuickPasteController: NSObject, NSWindowDelegate {
                 self.close()
                 return
             }
+            // Always write the clip first — this is what makes the manual
+            // ⌘V fallback reliable regardless of Accessibility permission.
             await PasteboardWriter.write(
                 item,
                 fileStore: container.fileStore,
@@ -81,8 +83,16 @@ final class QuickPasteController: NSObject, NSWindowDelegate {
             )
             self.close()
             let autoPaste = await container.settings.get(SettingsKeys.autoPaste)
-            if autoPaste, AccessibilityPermission.isGranted() {
+            guard autoPaste else { return }
+            if AccessibilityPermission.isGranted() {
                 _ = await container.pasteEngine.paste()
+            } else {
+                // Auto-paste is on but macOS is dropping our synthetic ⌘V
+                // because the Accessibility grant is missing (common after a
+                // rebuild/re-sign, which invalidates the TCC entry). The clip
+                // is already on the pasteboard, so nudge the system prompt so
+                // the user can re-enable it; ⌘V still works meanwhile.
+                _ = AccessibilityPermission.requestWithPrompt()
             }
         }
     }
