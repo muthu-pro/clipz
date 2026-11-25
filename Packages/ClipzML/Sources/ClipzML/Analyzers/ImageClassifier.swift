@@ -16,31 +16,16 @@ public struct ImageClassifier: Sendable {
     }
 
     public func classify(cgImage: CGImage) async throws -> [ImageTag] {
-        try await withCheckedThrowingContinuation { cont in
-            let req = VNClassifyImageRequest { request, error in
-                if let error {
-                    cont.resume(throwing: error)
-                    return
-                }
-                let obs = (request.results as? [VNClassificationObservation]) ?? []
-                let tags: [ImageTag] = obs
-                    .filter { Double($0.confidence) >= self.minConfidence }
-                    .prefix(self.maxResults)
-                    .map {
-                        ImageTag(
-                            identifier: $0.identifier,
-                            confidence: Double($0.confidence)
-                        )
-                    }
-                cont.resume(returning: tags)
-            }
-            do {
-                try VNImageRequestHandler(cgImage: cgImage, options: [:])
-                    .perform([req])
-            } catch {
-                cont.resume(throwing: error)
-            }
-        }
+        // Synchronous perform + read results — a completion handler plus a
+        // catch-resume resumed the continuation twice on Vision errors.
+        let req = VNClassifyImageRequest()
+        try VNImageRequestHandler(cgImage: cgImage, options: [:]).perform([req])
+
+        let obs = req.results ?? []
+        return obs
+            .filter { Double($0.confidence) >= self.minConfidence }
+            .prefix(self.maxResults)
+            .map { ImageTag(identifier: $0.identifier, confidence: Double($0.confidence)) }
     }
 
     public struct ImageTag: Sendable {

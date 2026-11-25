@@ -4,6 +4,24 @@ All notable changes to Clipz are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/); versions track the app's
 `MARKETING_VERSION`.
 
+## [1.0.3] - 2026-11-25
+
+### Fixes
+- **Fixed a launch crash** (seen on macOS 26 "Tahoe") when a very small image —
+  e.g. a 2×4 spacer/tracking pixel — was analyzed. Vision rejected the image
+  and the analyzers resumed their async continuation twice
+  (`SWIFT TASK CONTINUATION MISUSE`), trapping the process. All Vision
+  analyzers now use a single synchronous `perform` + results read, and the
+  pipeline skips degenerate (≤ 2px) images.
+
+### Added
+- **In-app update checks.** Clipz compares the running version against the
+  latest GitHub release (opt-out, ~once a day). About shows the status with a
+  **Check for Updates** / **Download…** action, a small badge appears next to
+  the title-bar logo when an update is available, and General has an
+  "Automatically check for updates" toggle. Update checks are the only
+  outbound network call and send no personal data.
+
 ## [1.0.2] - 2026-10-21
 
 ### Paste

@@ -16,31 +16,21 @@ public struct HumanDetector: Sendable {
     }
 
     public func detect(cgImage: CGImage) async throws -> [HumanDetection] {
-        try await withCheckedThrowingContinuation { cont in
-            let req = VNDetectHumanRectanglesRequest { request, error in
-                if let error {
-                    cont.resume(throwing: error)
-                    return
-                }
-                let obs = (request.results as? [VNHumanObservation]) ?? []
-                let results: [HumanDetection] = obs
-                    .filter { Double($0.confidence) >= self.minConfidence }
-                    .map {
-                        HumanDetection(
-                            confidence: Double($0.confidence),
-                            bbox: OCRAnalyzer.normalizedTopLeftBBox($0.boundingBox)
-                        )
-                    }
-                cont.resume(returning: results)
+        // Synchronous perform + read results — avoids the double continuation
+        // resume (completion handler + catch) that crashed on Vision errors.
+        let req = VNDetectHumanRectanglesRequest()
+        req.upperBodyOnly = upperBodyOnly
+        try VNImageRequestHandler(cgImage: cgImage, options: [:]).perform([req])
+
+        let obs = req.results ?? []
+        return obs
+            .filter { Double($0.confidence) >= self.minConfidence }
+            .map {
+                HumanDetection(
+                    confidence: Double($0.confidence),
+                    bbox: OCRAnalyzer.normalizedTopLeftBBox($0.boundingBox)
+                )
             }
-            req.upperBodyOnly = upperBodyOnly
-            do {
-                try VNImageRequestHandler(cgImage: cgImage, options: [:])
-                    .perform([req])
-            } catch {
-                cont.resume(throwing: error)
-            }
-        }
     }
 
     public struct HumanDetection: Sendable {

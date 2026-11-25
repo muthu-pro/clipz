@@ -50,6 +50,12 @@ public struct VisionMLPipeline: MLPipeline {
     /// Run every image analyzer in parallel over a single decoded frame.
     /// Shared by `analyzeImage` and the per-frame loop in `analyzeVideo`.
     func analyze(cgImage: CGImage) async throws -> ImageAnalysis {
+        // Vision rejects images with any dimension of 2px or smaller
+        // ("image is too small…"). Such clips (spacer GIFs, tracking pixels)
+        // carry nothing to analyze — skip them so no analyzer is handed an
+        // input it will error on.
+        guard cgImage.width > 2, cgImage.height > 2 else { return ImageAnalysis() }
+
         async let ocrOut = ocr.recognize(cgImage: cgImage)
         async let tagsOut = classifier.classify(cgImage: cgImage)
         async let animalsOut = animals.detect(cgImage: cgImage)

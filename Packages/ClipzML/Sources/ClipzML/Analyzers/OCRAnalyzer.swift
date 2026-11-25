@@ -18,34 +18,27 @@ public struct OCRAnalyzer: Sendable {
     }
 
     public func recognize(cgImage: CGImage) async throws -> [RecognizedText] {
-        try await withCheckedThrowingContinuation { cont in
-            let req = VNRecognizeTextRequest { request, error in
-                if let error {
-                    cont.resume(throwing: error)
-                    return
-                }
-                let observations = (request.results as? [VNRecognizedTextObservation]) ?? []
-                let results: [RecognizedText] = observations.compactMap { obs in
-                    guard let best = obs.topCandidates(1).first else { return nil }
-                    return RecognizedText(
-                        text: best.string,
-                        confidence: Double(best.confidence),
-                        bbox: Self.normalizedTopLeftBBox(obs.boundingBox)
-                    )
-                }
-                cont.resume(returning: results)
-            }
-            req.recognitionLevel = (level == .fast) ? .fast : .accurate
-            req.usesLanguageCorrection = true
-            req.recognitionLanguages = languages
-            req.minimumTextHeight = 0.015
+        let req = VNRecognizeTextRequest()
+        req.recognitionLevel = (level == .fast) ? .fast : .accurate
+        req.usesLanguageCorrection = true
+        req.recognitionLanguages = languages
+        req.minimumTextHeight = 0.015
 
-            do {
-                try VNImageRequestHandler(cgImage: cgImage, options: [:])
-                    .perform([req])
-            } catch {
-                cont.resume(throwing: error)
-            }
+        // Vision's `perform` is synchronous and populates `req.results`; using
+        // a completion handler *and* catching the throw resumed the old
+        // continuation twice (SWIFT TASK CONTINUATION MISUSE) when Vision
+        // rejected an input — e.g. a too-small image. One throwing call, one
+        // read: no double-resume possible.
+        try VNImageRequestHandler(cgImage: cgImage, options: [:]).perform([req])
+
+        let observations = req.results ?? []
+        return observations.compactMap { obs in
+            guard let best = obs.topCandidates(1).first else { return nil }
+            return RecognizedText(
+                text: best.string,
+                confidence: Double(best.confidence),
+                bbox: Self.normalizedTopLeftBBox(obs.boundingBox)
+            )
         }
     }
 

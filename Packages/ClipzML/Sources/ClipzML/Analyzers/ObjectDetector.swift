@@ -66,25 +66,16 @@ public struct ObjectDetector: Sendable {
     }
 
     private func salientBoxes(in cgImage: CGImage) async throws -> [SalientBox] {
-        try await withCheckedThrowingContinuation { cont in
-            let req = VNGenerateObjectnessBasedSaliencyImageRequest { request, error in
-                if let error {
-                    cont.resume(throwing: error)
-                    return
-                }
-                let saliency = (request.results as? [VNSaliencyImageObservation])?.first
-                let objects = saliency?.salientObjects ?? []
-                let filtered: [SalientBox] = objects
-                    .filter { Double($0.confidence) >= self.minSaliencyConfidence }
-                    .map { SalientBox(rect: $0.boundingBox, confidence: $0.confidence) }
-                cont.resume(returning: filtered)
-            }
-            do {
-                try VNImageRequestHandler(cgImage: cgImage, options: [:]).perform([req])
-            } catch {
-                cont.resume(throwing: error)
-            }
-        }
+        // Synchronous perform + read results — avoids the double continuation
+        // resume (completion handler + catch) that crashed on Vision errors.
+        let req = VNGenerateObjectnessBasedSaliencyImageRequest()
+        try VNImageRequestHandler(cgImage: cgImage, options: [:]).perform([req])
+
+        let saliency = req.results?.first
+        let objects = saliency?.salientObjects ?? []
+        return objects
+            .filter { Double($0.confidence) >= self.minSaliencyConfidence }
+            .map { SalientBox(rect: $0.boundingBox, confidence: $0.confidence) }
     }
 
     // MARK: - Stage 2: per-region label

@@ -14,31 +14,21 @@ public struct AnimalDetector: Sendable {
     }
 
     public func detect(cgImage: CGImage) async throws -> [AnimalDetection] {
-        try await withCheckedThrowingContinuation { cont in
-            let req = VNRecognizeAnimalsRequest { request, error in
-                if let error {
-                    cont.resume(throwing: error)
-                    return
-                }
-                let obs = (request.results as? [VNRecognizedObjectObservation]) ?? []
-                let results: [AnimalDetection] = obs.compactMap { o in
-                    guard let best = o.labels.first,
-                          Double(best.confidence) >= self.minConfidence
-                    else { return nil }
-                    return AnimalDetection(
-                        identifier: best.identifier.lowercased(),
-                        confidence: Double(best.confidence),
-                        bbox: OCRAnalyzer.normalizedTopLeftBBox(o.boundingBox)
-                    )
-                }
-                cont.resume(returning: results)
-            }
-            do {
-                try VNImageRequestHandler(cgImage: cgImage, options: [:])
-                    .perform([req])
-            } catch {
-                cont.resume(throwing: error)
-            }
+        // Synchronous perform + read results — avoids the double continuation
+        // resume (completion handler + catch) that crashed on Vision errors.
+        let req = VNRecognizeAnimalsRequest()
+        try VNImageRequestHandler(cgImage: cgImage, options: [:]).perform([req])
+
+        let obs = req.results ?? []
+        return obs.compactMap { o in
+            guard let best = o.labels.first,
+                  Double(best.confidence) >= self.minConfidence
+            else { return nil }
+            return AnimalDetection(
+                identifier: best.identifier.lowercased(),
+                confidence: Double(best.confidence),
+                bbox: OCRAnalyzer.normalizedTopLeftBBox(o.boundingBox)
+            )
         }
     }
 

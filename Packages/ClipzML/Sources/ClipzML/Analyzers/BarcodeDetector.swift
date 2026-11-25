@@ -11,34 +11,24 @@ public struct BarcodeDetector: Sendable {
     public init() {}
 
     public func detect(cgImage: CGImage) async throws -> [BarcodeHit] {
-        try await withCheckedThrowingContinuation { cont in
-            let req = VNDetectBarcodesRequest { request, error in
-                if let error {
-                    cont.resume(throwing: error)
-                    return
-                }
-                let observations = (request.results as? [VNBarcodeObservation]) ?? []
-                let hits: [BarcodeHit] = observations.compactMap { obs in
-                    guard let payload = obs.payloadStringValue else { return nil }
-                    return BarcodeHit(
-                        symbology: obs.symbology.rawValue,
-                        payload: payload,
-                        confidence: Double(obs.confidence),
-                        bbox: OCRAnalyzer.normalizedTopLeftBBox(obs.boundingBox)
-                    )
-                }
-                cont.resume(returning: hits)
-            }
-            req.symbologies = [
-                .qr, .ean8, .ean13, .code128, .code39,
-                .pdf417, .dataMatrix, .aztec,
-            ]
-            do {
-                try VNImageRequestHandler(cgImage: cgImage, options: [:])
-                    .perform([req])
-            } catch {
-                cont.resume(throwing: error)
-            }
+        // Synchronous perform + read results — avoids the double continuation
+        // resume (completion handler + catch) that crashed on Vision errors.
+        let req = VNDetectBarcodesRequest()
+        req.symbologies = [
+            .qr, .ean8, .ean13, .code128, .code39,
+            .pdf417, .dataMatrix, .aztec,
+        ]
+        try VNImageRequestHandler(cgImage: cgImage, options: [:]).perform([req])
+
+        let observations = req.results ?? []
+        return observations.compactMap { obs in
+            guard let payload = obs.payloadStringValue else { return nil }
+            return BarcodeHit(
+                symbology: obs.symbology.rawValue,
+                payload: payload,
+                confidence: Double(obs.confidence),
+                bbox: OCRAnalyzer.normalizedTopLeftBBox(obs.boundingBox)
+            )
         }
     }
 

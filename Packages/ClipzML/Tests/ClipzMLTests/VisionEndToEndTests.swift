@@ -31,6 +31,24 @@ struct VisionEndToEndTests {
                 "Expected Vision OCR to find the rendered phrase; got \(analysis.ocr.map(\.text))")
     }
 
+    @Test("A degenerate tiny image is skipped without crashing")
+    func tinyImageIsSkipped() async throws {
+        // Regression: a 2×4 clip (spacer/tracking pixel) made Vision throw
+        // "image is too small", and the analyzers' double continuation-resume
+        // trapped the process. The pipeline must now return an empty analysis.
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let ctx = CGContext(
+            data: nil, width: 2, height: 4, bitsPerComponent: 8, bytesPerRow: 0,
+            space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        )
+        let tiny = try #require(ctx?.makeImage())
+
+        let analysis = try await VisionMLPipeline().analyze(cgImage: tiny)
+        #expect(analysis.ocr.isEmpty)
+        #expect(analysis.tags.isEmpty)
+        #expect(analysis.barcodes.isEmpty)
+    }
+
     // MARK: - Helpers
 
     /// Draws `phrase` into an offscreen CGContext and writes a PNG to
